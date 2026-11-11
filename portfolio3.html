@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ravichandran J — Offensive &amp; AI Security</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;800&family=Rajdhani:wght@400;500;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#03040b;--sf:rgba(14,18,38,.72);--ln:rgba(120,140,255,.18);--tx:#e9edff;--mu:#8a93b8;--c:#00e5ff;--m:#ff2bd6;--g:#7dff9b;--inv:#03040b;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#eef1fb;--sf:rgba(255,255,255,.8);--ln:rgba(40,50,120,.18);--tx:#10142b;--mu:#586084;--c:#006f86;--m:#b0128f;--g:#1a7a38;--inv:#fff}}
+:root[data-theme="light"]{--bg:#eef1fb;--sf:rgba(255,255,255,.8);--ln:rgba(40,50,120,.18);--tx:#10142b;--mu:#586084;--c:#006f86;--m:#b0128f;--g:#1a7a38;--inv:#fff}
+:root[data-theme="dark"]{--bg:#03040b;--sf:rgba(14,18,38,.72);--ln:rgba(120,140,255,.18);--tx:#e9edff;--mu:#8a93b8;--c:#00e5ff;--m:#ff2bd6;--g:#7dff9b;--inv:#03040b}
+html{scroll-behavior:smooth;scroll-padding-top:calc(env(safe-area-inset-top,0px) + 70px);height:100%}
+*{box-sizing:border-box}
+body{margin:0;min-height:100%;background:var(--bg);color:var(--tx);font:18px/1.55 Rajdhani,system-ui,sans-serif;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:90}
+body::after{content:"";position:fixed;inset:0;z-index:-1;background:radial-gradient(50% 40% at 85% 5%,color-mix(in srgb,var(--m) 16%,transparent),transparent),radial-gradient(45% 40% at 5% 60%,color-mix(in srgb,var(--c) 14%,transparent),transparent)}
+#cv{position:fixed;inset:0;z-index:-2;width:100%;height:100%;opacity:.55}
+#pg{position:fixed;left:0;top:env(safe-area-inset-top,0px);height:3px;width:0;background:linear-gradient(90deg,var(--c),var(--m));z-index:95;box-shadow:0 0 12px var(--c)}
+a{color:inherit;text-decoration:none}.f{font-family:"Fira Code",monospace}.o{font-family:Orbitron,sans-serif}
+.w{max-width:1160px;margin:0 auto;padding:0 22px}
+#boot{position:fixed;inset:0;z-index:100;background:var(--bg);display:grid;place-items:center;transition:opacity .6s,visibility .6s;padding:20px}
+#boot.x{opacity:0;visibility:hidden}
+#boot pre{margin:0;font:13px/1.7 "Fira Code",monospace;color:var(--g);white-space:pre-wrap;max-width:460px}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:80;background:color-mix(in srgb,var(--bg) 70%,transparent);backdrop-filter:blur(16px);border-bottom:1px solid var(--ln)}
+header .w{display:flex;justify-content:space-between;align-items:center;height:60px;gap:10px}
+.lg{font:800 16px Orbitron;letter-spacing:.12em}.lg b{color:var(--c)}
+nav{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
+nav a{font:12px "Fira Code",monospace;color:var(--mu);padding:7px 10px;border-radius:6px;white-space:nowrap}
+nav a:hover,nav a.on{color:var(--c);background:color-mix(in srgb,var(--c) 10%,transparent)}
+#tg{background:none;border:1px solid var(--ln);color:var(--tx);border-radius:6px;padding:5px 10px;cursor:pointer}
+.hero{min-height:92vh;display:flex;align-items:center;padding:60px 0}
+.tag{display:inline-flex;gap:8px;align-items:center;font:12px "Fira Code";color:var(--g);border:1px solid var(--ln);background:var(--sf);padding:6px 14px;border-radius:99px}
+.tag i{width:7px;height:7px;border-radius:50%;background:var(--g);box-shadow:0 0 10px var(--g);animation:bl 1.3s infinite}
+@keyframes bl{50%{opacity:.2}}
+h1{font:800 clamp(40px,9.5vw,118px)/.95 Orbitron;margin:22px 0 14px;letter-spacing:-.02em}
+.gl{position:relative;display:inline-block;background:linear-gradient(90deg,var(--c),var(--m));-webkit-background-clip:text;background-clip:text;color:transparent}
+.gl::before,.gl::after{content:attr(data-t);position:absolute;left:0;top:0;width:100%;overflow:hidden;background:inherit;-webkit-background-clip:text;background-clip:text;color:transparent;opacity:.8}
+.gl::before{animation:g1 3.2s infinite;clip-path:inset(0 0 60% 0);transform:translateX(-2px)}
+.gl::after{animation:g2 2.7s infinite;clip-path:inset(60% 0 0 0);transform:translateX(2px)}
+@keyframes g1{0%,90%,100%{transform:translateX(0)}92%{transform:translateX(-5px)}95%{transform:translateX(4px)}}
+@keyframes g2{0%,85%,100%{transform:translateX(0)}88%{transform:translateX(6px)}91%{transform:translateX(-4px)}}
+.ty{font:500 clamp(14px,2.4vw,20px) "Fira Code";color:var(--mu);min-height:1.6em}.ty b{color:var(--c);font-weight:500}
+.cur{display:inline-block;width:9px;height:1.05em;background:var(--c);vertical-align:-3px;animation:bl 1s infinite;margin-left:2px}
+.lead{max-width:640px;color:var(--mu);font-size:20px;margin:20px 0 28px}.lead b{color:var(--tx);font-weight:600}
+.cta{display:flex;flex-wrap:wrap;gap:10px}
+.bt{padding:13px 22px;border:1px solid var(--ln);background:var(--sf);border-radius:10px;font:13px "Fira Code";transition:.25s;backdrop-filter:blur(8px)}
+.bt:hover{border-color:var(--c);color:var(--c);transform:translateY(-2px);box-shadow:0 0 28px -6px var(--c)}
+.bt.p{background:linear-gradient(90deg,var(--c),var(--m));color:var(--inv);border:0;font-weight:500}.bt.p:hover{color:var(--inv);box-shadow:0 0 34px -4px var(--m)}
+.hg{display:grid;grid-template-columns:1.25fr .75fr;gap:30px;align-items:center;width:100%}
+@media(max-width:860px){.hg{grid-template-columns:1fr}.orb{max-width:300px;margin:0 auto}}
+.orb{position:relative;aspect-ratio:1;perspective:900px}
+.orb div{position:absolute;inset:0;border-radius:50%;border:1px solid var(--c);box-shadow:0 0 30px -8px var(--c),inset 0 0 30px -12px var(--c);animation:rt 9s linear infinite}
+.orb div:nth-child(2){inset:12%;border-color:var(--m);animation-duration:12s;animation-direction:reverse;box-shadow:0 0 30px -8px var(--m)}
+.orb div:nth-child(3){inset:26%;border-color:var(--g);animation-duration:7s}
+.orb div:nth-child(4){inset:38%;background:radial-gradient(circle,color-mix(in srgb,var(--c) 40%,transparent),transparent 70%);border:0;animation:pl 3s ease-in-out infinite}
+.orb span{position:absolute;inset:0;display:grid;place-items:center;font:800 clamp(22px,4vw,34px) Orbitron;letter-spacing:.1em}
+@keyframes rt{from{transform:rotateX(65deg) rotateZ(0)}to{transform:rotateX(65deg) rotateZ(360deg)}}
+@keyframes pl{50%{transform:scale(1.25);opacity:.6}}
+.mq{overflow:hidden;border-block:1px solid var(--ln);padding:12px 0;background:var(--sf);white-space:nowrap}
+.mq div{display:inline-block;animation:mq 34s linear infinite;font:13px "Fira Code";color:var(--mu)}.mq b{color:var(--c);margin:0 18px;font-weight:400}
+@keyframes mq{to{transform:translateX(-50%)}}
+section{padding:90px 0}
+.hd{margin-bottom:38px}.hd small{font:12px "Fira Code";color:var(--m);letter-spacing:.2em}
+.hd h2{font:800 clamp(28px,5vw,52px)/1.05 Orbitron;margin:8px 0 0}
+.hd p{color:var(--mu);max-width:640px;margin:10px 0 0}
+.cds{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.cd{position:relative;background:var(--sf);border:1px solid var(--ln);border-radius:16px;padding:24px;backdrop-filter:blur(10px);transition:transform .25s,border-color .25s;overflow:hidden;transform-style:preserve-3d}
+.cd::before{content:"";position:absolute;inset:0;background:radial-gradient(300px circle at var(--x,50%) var(--y,0),color-mix(in srgb,var(--c) 18%,transparent),transparent 60%);opacity:0;transition:.3s}
+.cd:hover::before{opacity:1}.cd:hover{border-color:var(--c)}
+.cd>*{position:relative}
+.cd h3{font:700 22px Rajdhani;margin:0 0 6px}.cd p{margin:0;color:var(--mu);font-size:16px}
+.k{font:11px "Fira Code";color:var(--c);display:block;margin-bottom:12px;letter-spacing:.12em}
+.sp2{grid-column:span 2}@media(max-width:620px){.sp2{grid-column:span 1}}
+.tgs{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}.tgs i{font:11px "Fira Code";font-style:normal;border:1px solid var(--ln);padding:3px 9px;border-radius:6px;color:var(--mu)}
+.st{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:16px;margin-top:-20px}
+.st .cd{text-align:center;padding:22px 10px}.st b{display:block;font:800 40px Orbitron;color:var(--c)}.st span{font:11px "Fira Code";color:var(--mu);text-transform:uppercase;letter-spacing:.1em}
+.tm{background:#05060d;border:1px solid var(--ln);border-radius:14px;overflow:hidden;font:14px/1.7 "Fira Code",monospace;color:#cfe;box-shadow:0 0 60px -20px var(--c)}
+.tm .bar{background:#0d1120;padding:10px 14px;display:flex;gap:7px;align-items:center;color:#778;font-size:12px}.tm .bar i{width:11px;height:11px;border-radius:50%;background:#ff5f56}.tm .bar i:nth-child(2){background:#ffbd2e}.tm .bar i:nth-child(3){background:#27c93f}
+#out{padding:16px 18px;height:300px;overflow:auto;white-space:pre-wrap}
+#out .c{color:var(--c)}#out .g{color:var(--g)}#out .m{color:var(--m)}
+.tm form{display:flex;gap:8px;padding:0 18px 16px;align-items:center}.tm form span{color:var(--g)}
+#in{flex:1;background:none;border:0;outline:0;color:#fff;font:inherit;min-width:0}
+.chips{display:flex;flex-wrap:wrap;gap:8px;padding:0 18px 16px}.chips button{font:12px "Fira Code";background:none;border:1px solid var(--ln);color:var(--mu);padding:4px 10px;border-radius:6px;cursor:pointer}.chips button:hover{color:var(--c);border-color:var(--c)}
+.sk{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.bar2{margin-bottom:12px}.bar2 div{display:flex;justify-content:space-between;font:12px "Fira Code";color:var(--mu);margin-bottom:5px}
+.bar2 u{display:block;height:6px;border-radius:9px;background:var(--ln);overflow:hidden}.bar2 u i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--c),var(--m));border-radius:9px;transition:width 1.4s cubic-bezier(.2,.8,.2,1);box-shadow:0 0 12px var(--c)}
+.in .bar2 u i{width:var(--v)}
+.tl{position:relative;margin-left:8px;padding-left:34px;border-left:1px solid var(--ln)}
+.tl::before{content:"";position:absolute;left:-1px;top:0;width:1px;height:var(--h,0);background:linear-gradient(var(--c),var(--m));box-shadow:0 0 10px var(--c)}
+.ev{position:relative;margin-bottom:28px}
+.ev::before{content:"";position:absolute;left:-42px;top:12px;width:15px;height:15px;border-radius:50%;background:var(--bg);border:2px solid var(--c);box-shadow:0 0 14px var(--c)}
+.ev .dt{font:12px "Fira Code";color:var(--m)}.ev h3{font:700 24px Rajdhani;margin:2px 0}.ev .co{color:var(--c);font-size:15px}
+.ev ul{margin:10px 0 0;padding-left:18px;color:var(--mu);font-size:16px}.ev li{margin-bottom:4px}
+.ft{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px}.ft button{font:12px "Fira Code";background:var(--sf);border:1px solid var(--ln);color:var(--mu);padding:8px 15px;border-radius:99px;cursor:pointer}
+.ft button.on{background:linear-gradient(90deg,var(--c),var(--m));color:var(--inv);border:0}
+.cw{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px}
+.ct{background:var(--sf);border:1px solid var(--ln);border-left:3px solid var(--c);border-radius:10px;padding:12px 15px;transition:.2s}.ct:hover{transform:translateX(4px);border-left-color:var(--m)}
+.ct b{display:block;font-size:16px;font-weight:600;line-height:1.3}.ct small{font:11px "Fira Code";color:var(--mu)}.ct.h{display:none}
+.tr{display:grid;gap:8px;grid-template-columns:repeat(auto-fit,minmax(210px,1fr))}.tr div{border:1px dashed var(--ln);border-radius:10px;padding:12px 14px;font-size:15px;color:var(--mu)}.tr b{color:var(--c);font:12px "Fira Code";display:block}
+.edu{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;padding:16px 0;border-bottom:1px solid var(--ln)}.edu span{color:var(--mu)}
+.big{display:block;font:800 clamp(26px,6.4vw,70px)/1.05 Orbitron;margin:0 0 30px}.big:hover{color:var(--c)}
+.lk{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}.lk a{display:flex;justify-content:space-between;border:1px solid var(--ln);background:var(--sf);border-radius:12px;padding:16px 18px;transition:.2s}.lk a:hover{border-color:var(--m);color:var(--m)}
+footer{padding:30px 0 44px;border-top:1px solid var(--ln);font:12px "Fira Code";color:var(--mu)}
+.rv{opacity:0;transform:translateY(30px);transition:opacity .8s,transform .8s}.rv.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}.bar2 u i{width:var(--v)}}
+</style>
+</head>
+<body>
+<div id="boot"><pre id="bt"></pre></div><div id="pg"></div><canvas id="cv"></canvas>
+<header><div class="w"><a class="lg" href="#top">RJ<b>//</b>SEC</a>
+<nav><a href="#about">/intel</a><a href="#term">/terminal</a><a href="#skills">/arsenal</a><a href="#exp">/missions</a><a href="#res">/research</a><a href="#build">/builds</a><a href="#lab">/ai-lab</a><a href="#wins">/wins</a><a href="#certs">/creds</a><a href="#contact">/contact</a></nav>
+<button id="tg" aria-label="Toggle theme">◐</button></div></header>
+
+<main id="top">
+<div class="w hero"><div class="hg"><div>
+<span class="tag"><i></i>ONLINE · COIMBATORE, TAMIL NADU</span>
+<h1><span class="gl" data-t="RAVICHANDRAN">RAVICHANDRAN</span><br><span class="gl" data-t="J.">J.</span></h1>
+<div class="ty">&gt; <b id="ty"></b><span class="cur"></span></div>
+<p class="lead">Security consultant and pentester who has gone from <b>CTF rooms</b> to <b>enterprise engagements</b> and now into <b>AI security</b>: breaking LLM apps, building agentic OSINT stacks and shipping open security models used by thousands.</p>
+<div class="cta"><a class="bt p" href="#exp">View missions →</a><a class="bt" href="#term">Open terminal</a><a class="bt" href="https://www.linkedin.com/in/ravichandran-j/">LinkedIn</a><a class="bt" href="https://huggingface.co/RavichandranJ">Hugging Face</a></div>
+</div><div class="orb" aria-hidden="true"><div></div><div></div><div></div><div></div><span>RJ</span></div></div></div>
+<div class="mq"><div id="mq"></div></div>
+
+<section><div class="w"><div class="st rv">
+<div class="cd"><b data-n="3" data-s="+">0</b><span>Years in VAPT</span></div>
+<div class="cd"><b data-n="50" data-s="+">0</b><span>Credentials</span></div>
+<div class="cd"><b data-n="14" data-s="/14">0</b><span>CPTS flags</span></div>
+<div class="cd"><b data-n="45" data-s="k+">0</b><span>Model downloads</span></div>
+<div class="cd"><b data-n="74" data-s="">0</b><span>GitHub repos</span></div>
+</div></div></section>
+
+<section id="about"><div class="w">
+<div class="hd rv"><small>// 01 · INTEL</small><h2>Who I am</h2></div>
+<div class="cds">
+<div class="cd sp2 rv"><span class="k">PROFILE</span><h3>Pentester turning AI-security specialist</h3><p>With 3+ years across web, API, network, mobile, thick-client, SAP and AI/LLM assessments, I validate SQL injection, XSS, authentication and authorization flaws, business-logic issues and sensitive data exposure, guided by OWASP Top 10, OWASP API Top 10 and PTES. My thesis: to secure AI well, you have to understand how it is built and run.</p><div class="tgs"><i>Burp Suite</i><i>Nmap</i><i>Nessus</i><i>Metasploit</i><i>MobSF</i><i>Nuclei</i><i>Wireshark</i><i>Kali</i></div></div>
+<div class="cd rv"><span class="k">SURFACE</span><h3>What I break</h3><p>Web · API · Network · Android &amp; iOS · Thick client · SAP · AI/LLM · Active Directory</p></div>
+<div class="cd rv"><span class="k">MOBILE</span><h3>Reverse engineering</h3><p>Authentication and OTP bypass, negative-payment abuse, local-storage leaks, and bypassing certificate pinning and root detection.</p></div>
+<div class="cd rv"><span class="k">AI SECURITY</span><h3>LLM red team</h3><p>Direct and indirect prompt injection, evasion, and AI-agent risk, backed by MLOps and GenAIOps training.</p></div>
+<div class="cd rv"><span class="k">COMMUNITY</span><h3>Teaching</h3><p>Talks and CSR sessions on ethical hacking, cyber risk, prompt injection and careers.</p></div>
+</div></div></section>
+
+<section id="term"><div class="w">
+<div class="hd rv"><small>// 02 · TERMINAL</small><h2>Talk to my profile</h2><p>Type a command or tap a chip.</p></div>
+<div class="tm rv"><div class="bar"><i></i><i></i><i></i>&nbsp;rj@kali:~</div><div id="out"></div>
+<div class="chips" id="chips"></div>
+<form id="fm"><span>$</span><input id="in" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="command" placeholder="type help"></form></div>
+</div></section>
+
+<section id="skills"><div class="w">
+<div class="hd rv"><small>// 03 · ARSENAL</small><h2>Skill matrix</h2></div>
+<div class="sk rv" id="sk"></div>
+</div></section>
+
+<section id="exp"><div class="w">
+<div class="hd rv"><small>// 04 · MISSIONS</small><h2>Experience</h2></div>
+<div class="tl" id="tl">
+<div class="ev rv"><span class="dt">APR 2025 → SEP 2025</span><h3>Security Analyst</h3><div class="co">EY · Coimbatore · Hybrid</div><ul><li>Assessed Web, Network, Thick Client, API, SAP and AI/LLM environments for real-world risk.</li><li>Manual and automated testing with detailed reports and actionable remediation guidance.</li><li>Presented findings to technical and non-technical stakeholders.</li></ul></div>
+<div class="ev rv"><span class="dt">AUG 2023 → APR 2025</span><h3>Associate Security Consultant</h3><div class="co">Cybersecurity-NxxT · Coimbatore</div><ul><li>VAPT of servers, network devices, web apps, Android and iOS for leading organizations.</li><li>Exploited critical mobile flaws: authentication and OTP bypass, negative payments, local-storage disclosure.</li><li>Bypassed certificate pinning and root detection via reverse engineering.</li><li>Supported OSINT-driven social-engineering assessments; helped improve hardening policies.</li><li>Ran CSR sessions on ethical hacking, cyber risk mitigation and prompt injection.</li></ul></div>
+<div class="ev rv"><span class="dt">JAN → JUL 2023</span><h3>Trainee Engineer</h3><div class="co">Cybersecurity-NxxT · Internship</div><ul><li>Web and network pentesting with Burp Suite, Nmap and Metasploit; risk-rated reports.</li></ul></div>
+<div class="ev rv"><span class="dt">JUL → DEC 2022</span><h3>VAPT Intern</h3><div class="co">Zacco – Digital Trust</div></div>
+<div class="ev rv"><span class="dt">OCT → DEC 2021</span><h3>Penetration Testing Intern</h3><div class="co">Virtually Testing Foundation · USA (remote)</div><ul><li>10-week programme with Hacktify Cyber Security covering the full web-vuln curriculum (see Training Log).</li></ul></div>
+<div class="ev rv"><span class="dt">AUG 2021</span><h3>Web Development Intern</h3><div class="co">Technophile Bud · PHP, HTML</div></div>
+<div class="ev rv"><span class="dt">NOV → DEC 2020</span><h3>Python with AI Intern</h3><div class="co">Accent Techno Soft</div></div>
+</div></div></section>
+
+<section id="res"><div class="w">
+<div class="hd rv"><small>// 05 · RESEARCH</small><h2>Agentic OSINT lab</h2><p>Giving an AI agent real hands inside a Kali pentest lab, tested against intentionally vulnerable machines.</p></div>
+<div class="cds">
+<a class="cd sp2 rv" href="https://lnkd.in/g3EcfHVz"><span class="k">WRITE-UP · MEDIUM</span><h3>Building an Agentic OSINT and Security Testing Stack on Kali Linux</h3><p>Architecture, Robin API shim, Docker setup, Tor verification and DeepSeek Harness plugin wiring, end to end. The agent decides when to call each tool in a multi-step workflow.</p><div class="tgs"><i>DeepSeek Harness</i><i>Robin</i><i>SearXNG</i><i>SpiderFoot</i><i>Docker</i><i>Tor</i></div></a>
+<div class="cd rv"><span class="k">STACK</span><h3>Open models, real tools</h3><p>Open models served via NVIDIA Build, with SpiderFoot for OSINT, SearXNG for search and Robin for dark-web intel.</p></div>
+<div class="cd rv"><span class="k">NEXT</span><h3>Model bake-off</h3><p>Same environment, different open models, compared on reasoning, recon, analysis and tool use.</p></div>
+</div></div></section>
+
+<section id="build"><div class="w">
+<div class="hd rv"><small>// 06 · BUILDS</small><h2>Projects</h2><p>Across @ravichandran3 (48 repos) and @Ravichandran-J (26 repos). Forks of other authors’ work are credited, not claimed.</p></div>
+<div class="cds">
+<a class="cd sp2 rv" href="https://github.com/ravichandran3/cxploit-framework"><span class="k">FLAGSHIP · PYTHON</span><h3>CXploit Framework v2.0</h3><p>Metasploit-class exploit development and pentest framework: 105 modules, auto-exploitation, encrypted C2, WAF bypass and a real-time dashboard.</p></a>
+<a class="cd rv" href="https://github.com/Ravichandran-J/PROJECT-CTF-TOOLS"><span class="k">PYTHON</span><h3>PROJECT-CTF-TOOLS</h3><p>CTF tooling, starred and forked by other developers.</p></a>
+<a class="cd rv" href="https://github.com/Ravichandran-J/CIPHER_WEBAPP"><span class="k">PYTHON</span><h3>CIPHER_WEBAPP</h3><p>Web app for cipher operations.</p></a>
+<a class="cd rv" href="https://github.com/Ravichandran-J/CIPHER_C"><span class="k">C</span><h3>CIPHER_C</h3><p>Cipher algorithms in C.</p></a>
+<a class="cd rv" href="https://github.com/Ravichandran-J/MD5"><span class="k">PYTHON</span><h3>MD5</h3><p>MD5 hashing implementation.</p></a>
+<a class="cd rv" href="https://github.com/ravichandran3/datascience"><span class="k">DATA</span><h3>datascience</h3><p>Data science project images.</p></a>
+</div>
+<p class="f rv" style="color:var(--mu);font-size:12px;margin-top:20px">Forked &amp; studied: fsociety (Manisso) · PUBG-map-hack (jussihi) · python-fingerprint-recognition (kjanko)</p>
+</div></section>
+
+<section id="lab"><div class="w">
+<div class="hd rv"><small>// 07 · AI LAB</small><h2>Open security models</h2><p>Model deployment, ONNX optimization and inference on low-power hardware. 15 models on Hugging Face.</p></div>
+<div class="cds">
+<a class="cd sp2 rv" href="https://huggingface.co/RavichandranJ/Dolphin3-Cyber-8B-GGUF"><span class="k">FLAGSHIP · 45.1K DOWNLOADS · 178 LIKES</span><h3>Dolphin3-Cyber-8B-GGUF</h3><p>A specialised, 100% local assistant for security researchers, ethical hackers and defenders. Runs on consumer hardware (down to 4GB VRAM), tuned on OWASP Top 10, MITRE ATT&amp;CK, CVEs and defensive playbooks. Received its first community pull request.</p></a>
+<a class="cd rv" href="https://huggingface.co/RavichandranJ/hermes-4-14b-malware-Analyst-lora"><span class="k">LORA · 14B</span><h3>Malware Analyst</h3><p>Hermes-4-14B adapter for malware analysis.</p></a>
+<a class="cd rv" href="https://huggingface.co/RavichandranJ/Dolphin3-Cyber-MalwareAnalyst-GGUF"><span class="k">GGUF · 8B</span><h3>Cyber Malware Analyst</h3><p>Quantized triage model for laptops.</p></a>
+<a class="cd rv" href="https://huggingface.co/RavichandranJ/passwd-gpt2"><span class="k">GPT-2</span><h3>passwd-gpt2</h3><p>Compact password-pattern research model.</p></a>
+<a class="cd rv" href="https://huggingface.co/RavichandranJ/models"><span class="k">+ MORE</span><h3>Hermes-4 GGUF quants →</h3><p>All 15 models on Hugging Face.</p></a>
+</div></div></section>
+
+<section id="wins"><div class="w">
+<div class="hd rv"><small>// 08 · ACHIEVEMENTS</small><h2>Milestones</h2></div>
+<div class="cds">
+<div class="cd rv"><span class="k">HTB · CPTS</span><h3>14/14 flags</h3><p>Foothold to domain compromise, with a 300-page professional report. Relied on manual exploitation and custom attack chains, not scanners.</p></div>
+<div class="cd rv"><span class="k">SECOPS · CAPenX</span><h3>7-hour expert exam</h3><p>Advanced AppSec challenges demanding crafted payloads and deep manual exploitation.</p></div>
+<div class="cd rv"><span class="k">C-AI/MLPen</span><h3>AI pentester</h3><p>Direct and indirect prompt injection, evasion mechanisms and LLM attack paths.</p></div>
+<div class="cd rv"><span class="k">CAISR</span><h3>AI Security &amp; Risk</h3><p>Securing and governing AI, LLMs, RAG, agents and MLOps pipelines.</p></div>
+<div class="cd rv"><span class="k">MICROSOFT · 2026</span><h3>MLOps Engineer + AI Apps Developer</h3><p>Two Azure associate certifications on MLOps, GenAIOps and agentic solutions.</p></div>
+<div class="cd rv"><span class="k">TALK · 5 APR 2025</span><h3>Bannari Amman Institute</h3><p>Cybersecurity trends and awareness session hosted by IECC BIT for students.</p></div>
+<div class="cd rv"><span class="k">HTB MACHINE</span><h3>Cicada pwned</h3><p>Active Directory machine owned on Hack The Box.</p></div>
+<div class="cd rv"><span class="k">OPEN SOURCE</span><h3>First community PR</h3><p>Dolphin3-Cyber grew from a solo project into a community-supported tool.</p></div>
+</div>
+<div class="hd rv" style="margin-top:60px"><small>// TRAINING LOG</small><h2 style="font-size:28px">VTF internship, 10 weeks</h2></div>
+<div class="tr rv"><div><b>WEEK 1-2</b>OWASP, Burp Suite, HTML injection, clickjacking, reporting</div><div><b>WEEK 3</b>Cross-site scripting: types, impact, prevention</div><div><b>WEEK 4</b>Open redirect and EXIF exposure</div><div><b>WEEK 5</b>CORS exploitation and prevention</div><div><b>WEEK 6</b>CSRF</div><div><b>WEEK 7</b>SSRF</div><div><b>WEEK 8</b>SQL injection in depth</div><div><b>WEEK 9-10</b>Nuclei: automation and custom YAML templates</div></div>
+</div></section>
+
+<section id="certs"><div class="w">
+<div class="hd rv"><small>// 09 · CREDENTIALS</small><h2>50+ earned</h2></div>
+<div class="ft rv" id="ft"></div><div class="cw" id="cw"></div>
+<div class="rv" style="margin-top:50px"><small class="f" style="color:var(--m)">EDUCATION</small>
+<div class="edu"><div><b>B.Tech, Computer Technology</b><br><span>Bannari Amman Institute of Technology</span></div><span class="f">2019 – 2023 · 8.69 CGPA</span></div>
+<div class="edu"><div><b>Higher Secondary</b><br><span>SSVM Institutions</span></div><span class="f">2017 – 2019</span></div></div>
+</div></section>
+
+<section id="contact"><div class="w">
+<div class="hd rv"><small>// 10 · CONTACT</small></div>
+<a class="big rv" href="https://www.linkedin.com/in/ravichandran-j/"><span class="gl" data-t="Let’s secure">Let’s secure</span><br>what’s next →</a>
+<div class="lk rv"><a href="https://www.linkedin.com/in/ravichandran-j/">LinkedIn <span>↗</span></a><a href="https://github.com/Ravichandran-J">GitHub · Ravichandran-J <span>↗</span></a><a href="https://github.com/ravichandran3">GitHub · ravichandran3 <span>↗</span></a><a href="https://huggingface.co/RavichandranJ">Hugging Face <span>↗</span></a><a href="https://twitter.com/ravicha68412231">X / Twitter <span>↗</span></a></div>
+</div></section>
+</main>
+<footer><div class="w">© 2026 Ravichandran J · Coimbatore · built for the AI-secure future</div></footer>
+
+<script>
+(function(){
+var $=function(i){return document.getElementById(i)},r=document.documentElement;
+var bl=["> init rj-secos v3.0","> loading offensive modules ... ok","> mounting ai-lab ... ok","> handshake: coimbatore.in ... ok","> access granted"],bi=0;
+(function b(){if(bi<bl.length){$('bt').textContent+=bl[bi++]+"\n";setTimeout(b,230)}else setTimeout(function(){$('boot').classList.add('x')},350)})();
+$('tg').onclick=function(){var d=r.getAttribute('data-theme')||(matchMedia('(prefers-color-scheme:light)').matches?'light':'dark');r.setAttribute('data-theme',d==='dark'?'light':'dark')};
+var R=["Security Consultant","Penetration Tester","HTB CPTS Certified","AI / LLM Red Teamer","Open-Model Builder"],i=0,j=0,dl=false;
+(function t(){var s=R[i];$('ty').textContent=s.slice(0,j);if(!dl&&j===s.length){dl=true;return setTimeout(t,1400)}if(dl&&j===0){dl=false;i=(i+1)%R.length}j+=dl?-1:1;setTimeout(t,dl?30:65)})();
+var M=["WEB","API","MOBILE","THICK CLIENT","SAP","NETWORK","ACTIVE DIRECTORY","LLM RED TEAM","PROMPT INJECTION","OSINT","MLOPS","GGUF","REVERSE ENGINEERING"],h="";M.concat(M).forEach(function(x){h+="<b>◆</b>"+x});$('mq').innerHTML=h;
+var S={"Offensive":[["Web & API pentesting",95],["Network / AD",88],["Mobile (Android, iOS)",85],["Reverse engineering",78]],"AI & Data":[["LLM / prompt-injection testing",90],["MLOps / GenAIOps",80],["Model quantization (GGUF)",82],["Python",90]],"Tooling":[["Burp Suite · Nmap · Metasploit",95],["Nessus · MobSF · Nuclei",88],["OSINT (SpiderFoot, Robin)",85],["Docker · Linux · Bash",85]]},sk="";
+Object.keys(S).forEach(function(k){sk+='<div class="cd"><span class="k">'+k.toUpperCase()+'</span>';S[k].forEach(function(s){sk+='<div class="bar2"><div><span>'+s[0]+'</span><span>'+s[1]+'%</span></div><u><i style="--v:'+s[1]+'%"></i></u></div>'});sk+='</div>'});$('sk').innerHTML=sk;
+var C=[["HTB Certified Penetration Testing Specialist (CPTS)","Hack The Box · 2025","off"],["eCPPTv2","INE Security · 2024","off"],["eJPT","INE Security · 2023","off"],["Certified AppSec Pentesting eXpert (CAPenX)","SecOps Group · 2025","off"],["Certified AppSec Practitioner (CAP)","SecOps Group · 2023","off"],["Certified Network Security Practitioner (CNSP)","SecOps Group · 2023","off"],["Linux Privilege Escalation","TCM Security · 2023","off"],["Certified AI/ML Pentester (C-AI/MLPen)","SecOps Group · 2025","ai"],["Certified AI Security & Risk (CAISR)","AI security · 2025","ai"],["Azure AI Apps and Agents Developer Associate","Microsoft · 2026","ai"],["Machine Learning Operations Engineer Associate","Microsoft · 2026","ai"],["Certified Cloud Security Practitioner – AWS","SecOps Group · 2023","cl"],["Google Cloud Essentials, Kubernetes, BigQuery ML + 15 labs","Qwiklabs · 2020","cl"],["Gremlin Chaos Engineering Practitioner","Gremlin · 2022","cl"],["CSI Linux Certified Investigator","CSI Linux · 2023","os"],["CSI Linux Dark Web Investigator","CSI Linux · 2023","os"],["CSI Linux Social Media Investigator","CSI Linux · 2023","os"],["CSI Linux OSINT Analyst","CSI Linux · 2023","os"],["Digital Forensics","COL-CEMCA · 2021","os"],["Network Defense Essentials (NDE)","EC-Council · 2022","fd"],["SQL Injection Attacks","EC-Council · 2022","fd"],["SSCP","Cybrary · 2021","fd"],["CVE Series: Apache Spark","Cybrary · 2022","fd"],["Reverse Engineering with dnSpy","Udemy · 2020","fd"],["Be a Whitehat Hacker and Pentester","Eduonix · 2020","fd"],["VTF Penetration Testing Internship","Virtually Testing Foundation · 2021","fd"]],L={all:"All",off:"Offensive",ai:"AI / ML",cl:"Cloud",os:"OSINT & Forensics",fd:"Foundations"};
+C.forEach(function(c){var d=document.createElement('div');d.className='ct';d.dataset.k=c[2];d.innerHTML='<b>'+c[0]+'</b><small>'+c[1]+'</small>';$('cw').appendChild(d)});
+Object.keys(L).forEach(function(k){var b=document.createElement('button');b.textContent=L[k];if(k==='all')b.className='on';b.onclick=function(){$('ft').querySelectorAll('button').forEach(function(x){x.className=''});b.className='on';$('cw').querySelectorAll('.ct').forEach(function(e){e.classList.toggle('h',k!=='all'&&e.dataset.k!==k)})};$('ft').appendChild(b)});
+var io=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');var n=x.target.querySelectorAll('[data-n]');n.forEach(function(el){var T=+el.dataset.n,v=0,id=setInterval(function(){v+=Math.ceil(T/40);if(v>=T){v=T;clearInterval(id)}el.textContent=v+el.dataset.s},30)});io.unobserve(x.target)}})},{threshold:.12});
+document.querySelectorAll('.rv').forEach(function(e){io.observe(e)});
+addEventListener('scroll',function(){var s=document.documentElement,p=scrollY/(s.scrollHeight-innerHeight);$('pg').style.width=(p*100)+'%';var tl=$('tl'),b=tl.getBoundingClientRect(),f=Math.min(Math.max((innerHeight*.6-b.top)/b.height,0),1);tl.style.setProperty('--h',(f*100)+'%')},{passive:true});
+document.addEventListener('pointermove',function(e){var t=e.target.closest&&e.target.closest('.cd');if(t){var b=t.getBoundingClientRect(),x=e.clientX-b.left,y=e.clientY-b.top;t.style.setProperty('--x',x+'px');t.style.setProperty('--y',y+'px');if(matchMedia('(hover:hover)').matches)t.style.transform='perspective(800px) rotateX('+((y/b.height-.5)*-5)+'deg) rotateY('+((x/b.width-.5)*5)+'deg)'}});
+document.addEventListener('pointerout',function(e){var t=e.target.closest&&e.target.closest('.cd');if(t)t.style.transform=''});
+var ls=document.querySelectorAll('nav a'),so=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting)ls.forEach(function(a){a.classList.toggle('on',a.getAttribute('href')==='#'+x.target.id)})})},{rootMargin:'-45% 0px -50% 0px'});
+document.querySelectorAll('section[id]').forEach(function(s){so.observe(s)});
+var out=$('out');function pr(t,c){var d=document.createElement('div');if(c)d.className=c;d.textContent=t;out.appendChild(d);out.scrollTop=out.scrollHeight}
+var CM={help:"commands: whoami · skills · certs · projects · ai · research · contact · clear",whoami:"Ravichandran J — Security Consultant | Pentester | AI Security\nBase: Coimbatore, Tamil Nadu, India\nExperience: 3+ years (EY, Cybersecurity-NxxT, Zacco, VTF)",skills:"web/api · network/AD · mobile · reverse eng · LLM red teaming · MLOps · OSINT · GGUF",certs:"HTB CPTS · eCPPTv2 · eJPT · CAPenX · C-AI/MLPen · CAISR · CAP · CNSP · CCSP-AWS · CSI Linux x4 · Microsoft MLOps + AI Apps (+ 40 more)",projects:"cxploit-framework · PROJECT-CTF-TOOLS · CIPHER_WEBAPP · CIPHER_C · MD5 · datascience",ai:"Dolphin3-Cyber-8B-GGUF (45.1k downloads) · Hermes-4-14B Malware Analyst LoRA · passwd-gpt2 · 15 models total",research:"Agentic OSINT stack on Kali: DeepSeek Harness + Robin + SearXNG + SpiderFoot + Docker + Tor",contact:"linkedin.com/in/ravichandran-j · github.com/Ravichandran-J · huggingface.co/RavichandranJ"};
+pr("RJ-SecOS v3.0 ready. Type 'help'.","g");
+function run(v){v=v.trim().toLowerCase();if(!v)return;pr("$ "+v,"c");if(v==="clear"){out.innerHTML="";return}pr(CM[v]||"command not found: "+v+" (try 'help')",CM[v]?"":"m")}
+$('fm').onsubmit=function(e){e.preventDefault();run($('in').value);$('in').value=""};
+Object.keys(CM).forEach(function(k){var b=document.createElement('button');b.textContent=k;b.onclick=function(){run(k)};$('chips').appendChild(b)});
+var cv=$('cv'),x=cv.getContext('2d'),P=[],W,H,mx=-999,my=-999;
+function rs(){W=cv.width=innerWidth;H=cv.height=innerHeight;P=[];for(var k=0;k<Math.min(90,W/14);k++)P.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.4,vy:(Math.random()-.5)*.4})}
+rs();addEventListener('resize',rs);addEventListener('pointermove',function(e){mx=e.clientX;my=e.clientY});
+function dr(){x.clearRect(0,0,W,H);var cs=getComputedStyle(r),a=cs.getPropertyValue('--c').trim()||'#00e5ff',b=cs.getPropertyValue('--m').trim()||'#ff2bd6';
+for(var k=0;k<P.length;k++){var p=P[k];p.x+=p.vx;p.y+=p.vy;if(p.x<0||p.x>W)p.vx*=-1;if(p.y<0||p.y>H)p.vy*=-1;x.fillStyle=k%3?a:b;x.globalAlpha=.7;x.beginPath();x.arc(p.x,p.y,1.5,0,6.3);x.fill();
+for(var q=k+1;q<P.length;q++){var o=P[q],d=Math.hypot(p.x-o.x,p.y-o.y);if(d<120){x.strokeStyle=a;x.globalAlpha=.14*(1-d/120);x.beginPath();x.moveTo(p.x,p.y);x.lineTo(o.x,o.y);x.stroke()}}
+var m=Math.hypot(p.x-mx,p.y-my);if(m<180){x.strokeStyle=b;x.globalAlpha=.5*(1-m/180);x.beginPath();x.moveTo(p.x,p.y);x.lineTo(mx,my);x.stroke()}}
+requestAnimationFrame(dr)}
+if(!matchMedia('(prefers-reduced-motion:reduce)').matches)dr();
+})();
+</script>
+</body>
+</html>
